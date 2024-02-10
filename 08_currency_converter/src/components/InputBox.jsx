@@ -1,17 +1,17 @@
-import React, { useId } from "react";
+import { useId } from "react";
 
 function InputBox({ 
     // Here, we've destructure the props
         label,
         amount, // To show on input box
+        currencyOptions = [],
         onAmountChange, // If amount is changed then you need to change the state also. // It's a method
         onCurrencyChange,  // If currency is changed then you need to change the state
-        currencyOptions = [],
         selectCurrency = "usd", // By default it's usd
         amountDisable = false, // user can change the amount // optional
         currencyDisable = false, 
-        className = "",
-
+        className = ""
+  
     }) { 
 
         // Optimization for label

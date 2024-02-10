@@ -1,16 +1,17 @@
 import './App.css'
 import { useState } from 'react';
 import { InputBox } from './components' // index.js is called by default so there's no need to add it.
-import { useCurrencyInfo } from './hooks/useCurrencyInfo'
+import useCurrencyInfo from './hooks/useCurrencyInfo'
 
 function App() {
 
   const [amount, setAmount] = useState(0);
   const [from, setFrom] = useState("usd");
   const [to, setTo] = useState("inr");
-  const [convertedAmount, selectedAmount] = useState(0);
+  const [convertedAmount, setConvertedAmount] = useState(0);
 
   const currencyInfo = useCurrencyInfo(from);
+  console.log({currencyInfo});
   const options = Object.keys(currencyInfo); // currency options
 
   const swap = () => {
@@ -30,7 +31,7 @@ function App() {
         <div
             className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat"
             style={{
-                backgroundImage: `url('${BackgroundImage}')`,
+                backgroundImage: `url('${BackgroundImage}')`
             }}
         >
             <div className="w-full">
@@ -49,6 +50,8 @@ function App() {
                                 onCurrencyChange={(amount) => setAmount(amount)}
                                 selectCurrency={from}
                                 onAmountChange={(amount) => setAmount(amount)}
+                                amountDisable
+                                currencyDisable
                             />
                         </div>
                         <div className="relative w-full h-0.5">
@@ -67,6 +70,8 @@ function App() {
                                 currencyOptions={options}
                                 onCurrencyChange={(currency) => setTo(currency)}
                                 selectCurrency={from}
+                                amountDisable
+                                currencyDisable
                             />
                         </div>
                         <button type="submit" className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg">

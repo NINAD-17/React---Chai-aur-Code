@@ -5,9 +5,11 @@ function useCurrencyInfo(currency) {
     const [data, setData] = useState({}); // If there's no data returned then default value is {}
 
     useEffect(() => {
+        console.log({currency});
         fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${currency}.json`)
         .then((res) => res.json())
-        .then((res) => setData(res.currency));
+        .then((res) => setData(res[currency]));
+        
     }, [currency]); // Whenever any change happen in currency then refresh it.
 
     console.log(data);
