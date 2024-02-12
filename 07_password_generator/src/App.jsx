@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, useRef } from "react";
 
 function App() {
   const [passLength, setPassLength] = useState(8);
-  const [numberAllowed, setNumberAllowed] = useState(false);
+  const [numberAllowed, setNumberAllowed] = useState(true);
   const [charAllowed, setCharAllowed] = useState(false);
   const [password, setPassword] = useState("");
 
@@ -32,7 +32,7 @@ function App() {
 
   useEffect(() => {
     passwordGenerator();
-  }, [passLength, numberAllowed, charAllowed, passwordGenerator])
+  }, [passLength, numberAllowed, charAllowed, passwordGenerator]); // When things from array change then passwordGenerator() calls.
   return (
     <>
       <div className="w-full max-w-md mx-auto shadow-md rounded-lg p-4 my-8 text-orange-500 bg-gray-800">

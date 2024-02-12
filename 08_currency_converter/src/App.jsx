@@ -13,6 +13,7 @@ function App() {
   const currencyInfo = useCurrencyInfo(from);
   console.log({currencyInfo});
   const options = Object.keys(currencyInfo); // currency options
+  console.log({options});
 
   const swap = () => {
     setFrom(to);
