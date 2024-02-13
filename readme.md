@@ -66,11 +66,11 @@ In React, a component can export only one HTML element. To group multiple elemen
 ### JSX Syntax
 React uses JSX, a syntax extension for JavaScript, that allows us to write HTML-like code in our JavaScript. This mixed syntax of JavaScript and HTML is parsed and converted into JavaScript objects at runtime.
 
-<img src="image.png" width="50%" /><br>
+<img src="./_images/image.png" width="50%" /><br>
 React don't understand above syntax.
 
 <br>
-<img src="image-1.png" width="60%" /> <br>
+<img src="./_images/image-1.png" width="60%" /> <br>
 React understand this converted syntax.
 
 
@@ -83,7 +83,7 @@ In React, components should be invoked using JSX syntax like `<MyApp />`. Althou
 ### React’s Responsiveness to State Changes
 React is designed to respond to changes in state variables. If a state variable updates, React ensures that the change is reflected everywhere the state variable is used. 
 
-<img src="image-2.png" width=40% />
+<img src="./_images/image-2.png" width=40% />
 <br> Here as one state change it's change is reflected everywhere.
 
 ### React’s Solution to UI Updates
@@ -119,15 +119,15 @@ When rendering lists in React, it’s important to specify a key prop for each c
 - In React, props (short for properties) make components reusable. By default, a component gets access to props, but props doesn’t contain anything.
 
 - If you want to pass an object or an array in props, it can’t be passed directly. You need to declare that in a variable and then pass.
-![alt text](image-3.png) <br>
+![alt text](./_images/image-3.png) <br>
 
 - Props in React is an object. So, you can access its values by dot notation method.
 
 - If you do not send any prop for a specific property, you can give it a default value. <br>
     - You can give a default value directly in a code but it's not good for readablility.
-    <img src="image-4.png" width=40%>
+    <img src="./_images/image-4.png" width=40%>
     - Better is to destructure the prop and give default values.
-    <img src="image-5.png" width=70%>
+    <img src="./_images/image-5.png" width=70%>
 
 ### useState Batched updates VS Individual updates: Interview Question
 - In React, the useState hook is a common way to manage state within functional components. When you call setCounter to update the state, React groups these updates together and re-renders the component only once after all the updates have been applied. This batching mechanism improves performance by minimizing unnecessary re-renders.
@@ -135,10 +135,10 @@ When rendering lists in React, it’s important to specify a key prop for each c
 - However, in certain cases, you might want to bypass this batching behavior and have each setCounter call trigger an individual update. This can be useful when you need to ensure that multiple state updates are applied in a specific order, or when you want to perform side effects after each update.
 
 - Code Example: 
-![alt text](image-6.png)
+![alt text](./_images/image-6.png)
 Since these calls are made within the same event handler, React batches them together and updates the state only once, resulting in a final increment of 1.
 
-    ![alt text](image-7.png)
+    ![alt text](./_images/image-7.png)
     The code is modified to use a callback function with setCounter.
 The callback receives the previous state (prevCounter) as an argument.
 Each call to setCounter now triggers an individual update, ensuring that the counter increments by 1 each time.
@@ -195,3 +195,25 @@ Prop drilling can lead to issues with component reusability and app performance.
 
 ### Solution of this problem
 There are several ways to overcome prop drilling, including using the Context API, Redux, or other state management libraries. These tools allow you to store state in a central location and access it from any component, eliminating the need to pass data through intermediate components.
+
+### Example `10_mini_context\`
+- Step 1: Create `context\` folder and export `UserContext`.
+            This context will give you a provider. As it provides you a variable. When you wrap `UserContext` then components within it will get an access to global UserContext variable.
+
+- Step 2: Make `UserContextProvider.jsx`. Here children means the things that this function gets are as it is returned. To make it provider you need to add a property to `UserContext` i.e `userContext.provider` to give a specific value access use value property. In value prop, we're giving an object so that we can pass multiple values.<br>
+![alt text](./_images/image-8.png)
+
+- step 3: In `App.jsx`,  wrap components in `UserContextProvider`
+- step 4: Make `component\` folder and create `Login.jsx` and `Profile.jsx` files. Import `UserContext` and `useState`.
+- Step 5: To fetch values of username, password use,
+    `const { setUser } = useContext(UserContext);`
+    So that you can able to set values in setUser by,
+    `setUser({ username, password });`
+    By `Login.jsx` you will understand how to send data.
+- step 6: To access data, refer example `Profile.jsx`
+    use `const { user } = useContext(UserContext);`
+
+
+### Example with different syntax `11_theme_switcher`
+step 1: create `theme.js` file and import `createContext, useContext` from react. In `createContext` you can also able give default value.
+step 2: define `ThemeContext`.provider in that file and make a custom hook called `useTheme`. This will reduce two imports. 
