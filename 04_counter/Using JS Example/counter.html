@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Counter <span class="cntr"></span></h1>
+    <button class="add">add <span class="cntr">0</span></button>
+    <button class="remove">remove <span class="cntr">0</span></button>
+</body>
+<script>
+    let counter = 0;
+
+    const pos = document.querySelectorAll(".cntr"); // nodelist
+    console.log(pos);
+    // pos.innerText = counter;
+
+    function setPos() {
+        pos.forEach(posIndex => {
+            posIndex.innerText = counter;
+        });
+    }
+
+    const add = document.querySelector(".add");
+    const remove = document.querySelector(".remove");
+
+    function addNum() {
+        counter++; // this will update counter variable's value in JS code but to make changes on screen then below line will required
+        console.log(counter);
+        // pos.innerText = counter; // NOTE: without this line, updated value will not be display on the screen
+        setPos();
+    }
+
+    function removeNum() {
+        counter--; // this will update counter variable's value in JS code but to make changes on screen then below line will required
+        console.log(counter);
+        // pos.innerText = counter; // NOTE: without this line, updated value will not be display on the screen
+        setPos();
+    }
+
+    add.addEventListener("click", addNum);
+    remove.addEventListener("click", removeNum);
+</script>   
+</html>

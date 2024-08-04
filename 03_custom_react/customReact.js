@@ -1,3 +1,4 @@
+// step 4: 
 function customRender(reactElement, container) {
     /*
         const domElement = document.createElement(reactElement.type);
@@ -8,15 +9,17 @@ function customRender(reactElement, container) {
         container.appendChild(domElement);
     */
 
+    // loop based code. Because there can be many props so instead of adding manually add it by loops
     const domElement = document.createElement(reactElement.type);
     domElement.innerHTML = reactElement.children;
     for(const prop in reactElement.props) {
-        if(prop === 'children') continue;
+        if(prop === 'children') continue; // this condition is for old react where props also contain childrens
         domElement.setAttribute(prop, reactElement.props[prop]);
     }
     container.appendChild(domElement);
 }
 
+// step 2:
 const reactElement = {
     type: 'a',
     props: {
@@ -26,6 +29,9 @@ const reactElement = {
     children: 'Click me to visit google'
 }
 
+
+// step 1: 
 const mainContainer = document.querySelector("#root");
 
+// step 3: 
 customRender(reactElement, mainContainer);

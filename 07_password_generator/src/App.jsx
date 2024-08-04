@@ -6,9 +6,10 @@ function App() {
   const [charAllowed, setCharAllowed] = useState(false);
   const [password, setPassword] = useState("");
 
-  const passwordRef = useRef(null);
+  // useRef hook: to taking reference of password field to copy
+  const passwordRef = useRef(null); // now, see <input ref>
 
-
+  // here useCallback is not responsible for running the function, it's for memoization /optimization by storing it in cache
   const passwordGenerator = useCallback(() => {
     let pass = "";
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -27,7 +28,7 @@ function App() {
   const copyPasswordToClipboard = useCallback(() => {
     passwordRef.current?.select(); // We use passwordRef to get functionality after copy otherwise you can just copy password without it also.
     // passwordRef.current?.setSelectionRange(0, 5); // It will only select upto 5 characters.
-    window.navigator.clipboard.writeText(password);
+    window.navigator.clipboard.writeText(password); // we're using 'window' because we know that when this code will run it will have access to window object as it will run on browser. But if you're using nextjs all code is rendered on server and it don't have access to window object
   }, [password]);
 
   useEffect(() => {
@@ -69,7 +70,7 @@ function App() {
           </div>
           <div className="flex text-sm gap-x-2">
             <input type="checkbox"
-            defaultChecked={numberAllowed}
+            defaultChecked={charAllowed}
             id="charInput"
             onChange={() => {
               setCharAllowed((prev) => !prev); // if true then false and vice versa.

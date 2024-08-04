@@ -3,6 +3,7 @@ import { useState } from "react"
 function App() {
   const [bgColor, setBgColor] = useState("blue");
 
+  // to generate random color
   const numToHex = (num) => {
     switch(num) {
       case 10: return 'A'
@@ -34,6 +35,7 @@ function App() {
 
   return (
     <>
+      {/* for animation: duration-200 */}
       <div className="w-full h-screen duration-200"
         style={{backgroundColor: bgColor}}>
           <div className="fixed flex flex-wrap justify-center bottom-12 inset-x-0 px-2">
